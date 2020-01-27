@@ -172,7 +172,9 @@ public class ArdConnect extends JArduino {
 	protected void setup() {
 		// initialize the digital pin as an output.
 		// Pin 13 has an LED connected on most Arduino boards
-		pinMode(DigitalPin.PIN_12, PinMode.OUTPUT);
+		pinMode(DigitalPin.PIN_1, PinMode.OUTPUT);
+		pinMode(DigitalPin.PIN_3, PinMode.OUTPUT);
+		pinMode(DigitalPin.PIN_5, PinMode.OUTPUT);
 	}
 	
 	@Override
@@ -185,6 +187,48 @@ public class ArdConnect extends JArduino {
 		delay(1000); // wait for a second
 	}
 
+	public static void run(int intensity, int time){
+		if (intensity == 2){
+			digitalWrite(DigitalPin.PIN_3, DigitalState.HIGH);
+			delay(50);
+			digitalWrite(DigitalPin.PIN_3, DigitalState.LOW);
+			delay(25);
+		} else if (intensity ==3) {
+			digitalWrite(DigitalPin.PIN_3, DigitalState.HIGH);
+			delay(50);
+			digitalWrite(DigitalPin.PIN_3, DigitalState.LOW);
+			delay(50);
+			
+			digitalWrite(DigitalPin.PIN_3, DigitalState.HIGH);
+			delay(50);
+			digitalWrite(DigitalPin.PIN_3, DigitalState.LOW);
+			delay(25);
+		}
+		
+		digitalWrite(DigitalPin.PIN_1, DigitalState.HIGH);
+		delay(time*50); 
+		
+		digitalWrite(DigitalPin.PIN_1, DigitalState.LOW);
+		delay(50);
+		
+		if (intensity == 2){
+			digitalWrite(DigitalPin.PIN_5, DigitalState.HIGH);
+			delay(50);
+			digitalWrite(DigitalPin.PIN_5, DigitalState.LOW);
+			delay(25);
+		} else if (intensity ==3) {
+			digitalWrite(DigitalPin.PIN_5, DigitalState.HIGH);
+			delay(50);
+			digitalWrite(DigitalPin.PIN_5, DigitalState.LOW);
+			delay(50);
+			
+			digitalWrite(DigitalPin.PIN_5, DigitalState.HIGH);
+			delay(50);
+			digitalWrite(DigitalPin.PIN_5, DigitalState.LOW);
+			delay(25);
+		}
+	}
+	
 	public static void main(String[] args) {
 		String serialPort;
 		if (args.length == 1) {
