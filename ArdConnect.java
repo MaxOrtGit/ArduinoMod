@@ -37,6 +37,7 @@ public class ArdConnect extends JArduino {
 	}
 	
 	public static void sendShock(int intensity, int time){
+		if(!from.inShock){
 		if (from.inWakeUp){
 			delay(75);
 		}
@@ -81,6 +82,7 @@ public class ArdConnect extends JArduino {
 			delay(25);
 		}
 		from.inShock = false;
+		}
 	}
 	
 	public static void main(String[] args) {
