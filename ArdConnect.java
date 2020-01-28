@@ -1,12 +1,14 @@
 class AutoTurnOn extends TimerTask{
 	public void run {
 		if (!from.inShock) {
-			device.getPin(9).setMode(Pin.Mode.OUTPUT);
-			device.getPin(9).setValue(350);
-			device.getpin(11).setMode(Pin.Mode.INPUT);
-			Thread.sleep(50);
-	
-			device.getPin(9).setMode(Pin.Mode.INPUT);
+			from.inWakeUp = true;
+			digitalWrite(DigitalPin.PIN_5, DigitalState.HIGH);
+			delay(50);
+			
+			digitalWrite(DigitalPin.PIN_5, DigitalState.LOW);
+			delay(25);
+			from.inWakeUp = false;
+			
 		}
 	}
 }
@@ -35,6 +37,9 @@ public class ArdConnect extends JArduino {
 	}
 	
 	public static void sendShock(int intensity, int time){
+		if (from.inWakeUp){
+			delay(75);
+		}
 		from.inShock = true;
 		if (intensity == 2){
 			digitalWrite(DigitalPin.PIN_3, DigitalState.HIGH);
