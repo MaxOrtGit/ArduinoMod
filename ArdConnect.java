@@ -37,6 +37,15 @@ public class ArdConnect extends JArduino {
 	}
 	
 	public static void sendShock(int intensity, int time){
+		String serialPort;
+		if (args.length == 1) {
+			serialPort = args[0];
+		} else {
+			serialPort = Serial4JArduino.selectSerialPort();
+		}
+		JArduino arduino = new ArdConnect(serialPort);
+		arduino.runArduinoProcess();
+		
 		if(!from.inShock){
 		if (from.inWakeUp){
 			delay(75);
@@ -85,16 +94,7 @@ public class ArdConnect extends JArduino {
 		}
 	}
 	
-	public static void main(String[] args) {
-		String serialPort;
-		if (args.length == 1) {
-			serialPort = args[0];
-		} else {
-			serialPort = Serial4JArduino.selectSerialPort();
-		}
-		JArduino arduino = new ArdConnect(serialPort);
-		arduino.runArduinoProcess();
-	}
+	
 }
 
 
